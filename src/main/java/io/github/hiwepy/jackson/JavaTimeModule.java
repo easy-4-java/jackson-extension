@@ -25,7 +25,6 @@ public class JavaTimeModule extends SimpleModule {
     private static final String TIME_PATTERN = "HH:mm:ss";
 
     public JavaTimeModule() {
-        super("hiwepy-java-time");
         this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
         this.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_PATTERN)));
         this.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(TIME_PATTERN)));
