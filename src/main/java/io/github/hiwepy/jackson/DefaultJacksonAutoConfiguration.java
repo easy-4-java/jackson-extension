@@ -1,20 +1,13 @@
 package io.github.hiwepy.jackson;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 import io.github.hiwepy.jackson.ser.MyBeanSerializerModifier;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Jackson ObjectMapper 默认配置（纯 Java，无 Spring 依赖）。
@@ -27,9 +20,6 @@ import java.time.format.DateTimeFormatter;
 public class DefaultJacksonAutoConfiguration {
 
     private static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    private static final String DATE_PATTERN = "yyyy-MM-dd";
-    private static final String TIME_PATTERN = "HH:mm:ss";
-
     private final boolean defaultNullArraySerializer;
     private final boolean defaultNullNumberSerializer;
     private final boolean defaultNullStringSerializer;
@@ -84,30 +74,19 @@ public class DefaultJacksonAutoConfiguration {
      * @return 配置好的 ObjectMapper 实例
      */
     public ObjectMapper jacksonObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        // simpleDateFormat(DATE_TIME_PATTERN)
-        objectMapper.setDateFormat(new SimpleDateFormat(DATE_TIME_PATTERN));
-        // failOnEmptyBeans(false)
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        // failOnUnknownProperties(false)
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        // featuresToEnable(MapperFeature.USE_GETTERS_AS_SETTERS, MapperFeature.ALLOW_FINAL_FIELDS_AS_MUTATORS)
-        objectMapper.configure(MapperFeature.USE_GETTERS_AS_SETTERS, true);
-        objectMapper.configure(MapperFeature.ALLOW_FINAL_FIELDS_AS_MUTATORS, true);
-
-        // 注册 jdk8 时间模块
         JavaTimeModule module = new JavaTimeModule();
-        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
-        module.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_PATTERN)));
-        module.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(TIME_PATTERN)));
-        objectMapper.registerModule(module);
-
-        // 注册 null 值兜底序列化器
-        MyBeanSerializerModifier myBeanSerializerModifier = new MyBeanSerializerModifier(defaultNullArraySerializer,
+        MyBeanSerializerModifier serializerModifier = new MyBeanSerializerModifier(defaultNullArraySerializer,
                 defaultNullNumberSerializer, defaultNullStringSerializer,
                 defaultNullDateSerializer, defaultNullBooleanSerializer, defaultNullJsonObjectSerializer);
-        objectMapper.setSerializerFactory(objectMapper.getSerializerFactory().withSerializerModifier(myBeanSerializerModifier));
-        return objectMapper;
+        module.setSerializerModifier(serializerModifier);
+
+        return JsonMapper.builder()
+                .defaultDateFormat(new SimpleDateFormat(DATE_TIME_PATTERN))
+                .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .enable(MapperFeature.USE_GETTERS_AS_SETTERS, MapperFeature.ALLOW_FINAL_FIELDS_AS_MUTATORS)
+                .addModule(module)
+                .build();
     }
 
 }

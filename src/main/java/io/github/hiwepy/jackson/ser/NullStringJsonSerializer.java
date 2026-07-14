@@ -1,11 +1,11 @@
 package io.github.hiwepy.jackson.ser;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.ValueSerializer;
+import tools.jackson.databind.SerializationContext;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -13,13 +13,13 @@ import java.util.Objects;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  */
-public class NullStringJsonSerializer extends JsonSerializer<Object> {
+public class NullStringJsonSerializer extends ValueSerializer<Object> {
 
     public static final NullStringJsonSerializer INSTANCE = new NullStringJsonSerializer();
 
     @Override
-    public void serialize(Object value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
-            throws IOException {
+    public void serialize(Object value, JsonGenerator jsonGenerator, SerializationContext serializerProvider)
+            throws JacksonException {
         if (Objects.isNull(value)) {
             jsonGenerator.writeString(StringUtils.EMPTY);
         }

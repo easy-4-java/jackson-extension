@@ -1,9 +1,9 @@
 package io.github.hiwepy.jackson.ser;
 
-import com.fasterxml.jackson.databind.BeanDescription;
-import com.fasterxml.jackson.databind.SerializationConfig;
-import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
-import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
+import tools.jackson.databind.BeanDescription;
+import tools.jackson.databind.SerializationConfig;
+import tools.jackson.databind.ser.BeanPropertyWriter;
+import tools.jackson.databind.ser.ValueSerializerModifier;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  */
-public class MyBeanSerializerModifier extends BeanSerializerModifier {
+public class MyBeanSerializerModifier extends ValueSerializerModifier {
 
     private final boolean defaultNullArraySerializer;
     private final boolean defaultNullNumberSerializer;
@@ -51,7 +51,7 @@ public class MyBeanSerializerModifier extends BeanSerializerModifier {
 
     @Override
     public List<BeanPropertyWriter> changeProperties(SerializationConfig config,
-                                                     BeanDescription beanDesc,
+                                                     BeanDescription.Supplier beanDesc,
                                                      List<BeanPropertyWriter> beanProperties) {
         // 1、循环所有的beanPropertyWriter
         for (BeanPropertyWriter writer : beanProperties) {

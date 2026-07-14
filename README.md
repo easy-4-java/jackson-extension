@@ -16,7 +16,7 @@
 <dependency>
     <groupId>io.github.hiwepy</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>2.0.x.20260630-SNAPSHOT</version>
+    <version>3.0.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
