@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson;
+package io.github.easy4j.jackson;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.PackageVersion;

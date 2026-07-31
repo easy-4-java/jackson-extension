@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson.annotation;
+package io.github.easy4j.jackson.annotation;
 
 import org.apache.commons.lang3.StringUtils;
 

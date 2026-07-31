@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson.deser;
+package io.github.easy4j.jackson.deser;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
