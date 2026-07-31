@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson;
+package io.github.easy4j.jackson;
 
 import tools.jackson.databind.module.SimpleModule;
 import tools.jackson.databind.ext.javatime.deser.LocalDateDeserializer;

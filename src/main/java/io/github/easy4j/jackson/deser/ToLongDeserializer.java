@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson.deser;
+package io.github.easy4j.jackson.deser;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.core.JsonParser;

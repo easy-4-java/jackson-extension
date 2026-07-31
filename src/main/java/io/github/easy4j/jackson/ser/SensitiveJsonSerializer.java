@@ -1,12 +1,12 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.BeanProperty;
 import tools.jackson.databind.SerializationContext;
 import tools.jackson.databind.ValueSerializer;
-import io.github.hiwepy.jackson.annotation.Sensitive;
-import io.github.hiwepy.jackson.annotation.SensitiveStrategy;
+import io.github.easy4j.jackson.annotation.Sensitive;
+import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 
 import java.util.Objects;
 

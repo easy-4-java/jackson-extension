@@ -1,9 +1,9 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.json.JsonMapper;
-import io.github.hiwepy.jackson.annotation.Sensitive;
-import io.github.hiwepy.jackson.annotation.SensitiveStrategy;
+import io.github.easy4j.jackson.annotation.Sensitive;
+import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

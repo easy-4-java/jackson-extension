@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import tools.jackson.databind.BeanDescription;
 import tools.jackson.databind.SerializationConfig;
