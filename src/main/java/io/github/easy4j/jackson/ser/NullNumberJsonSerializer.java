@@ -1,27 +1,26 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Objects;
 
 /**
- * 处理日期类型的null值
+ * 处理数值类型的null值
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  */
-public class NullDateJsonSerializer extends JsonSerializer<Object> {
+public class NullNumberJsonSerializer extends JsonSerializer<Object> {
 
-    public static final NullDateJsonSerializer INSTANCE = new NullDateJsonSerializer();
+    public static final NullNumberJsonSerializer INSTANCE = new NullNumberJsonSerializer();
 
     @Override
     public void serialize(Object value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
             throws IOException {
         if (Objects.isNull(value)) {
-            jsonGenerator.writeString(StringUtils.EMPTY);
+            jsonGenerator.writeNumber(0);
         }
     }
 

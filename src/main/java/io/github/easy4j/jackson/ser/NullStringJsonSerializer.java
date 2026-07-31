@@ -1,28 +1,27 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Objects;
 
 /**
- * JSON null 值序列化器
- *
- * <p>当序列化的值为 null 时，输出 null 值。
+ * 处理字符串类型的null值
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  */
-public class NullJsonSerializer extends JsonSerializer<Object> {
+public class NullStringJsonSerializer extends JsonSerializer<Object> {
 
-    public static final NullJsonSerializer INSTANCE = new NullJsonSerializer();
+    public static final NullStringJsonSerializer INSTANCE = new NullStringJsonSerializer();
 
     @Override
     public void serialize(Object value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
             throws IOException {
         if (Objects.isNull(value)) {
-            jsonGenerator.writeNull();
+            jsonGenerator.writeString(StringUtils.EMPTY);
         }
     }
 

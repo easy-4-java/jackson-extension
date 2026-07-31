@@ -1,4 +1,4 @@
-package io.github.hiwepy.jackson.ser;
+package io.github.easy4j.jackson.ser;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import io.github.hiwepy.jackson.annotation.Sensitive;
-import io.github.hiwepy.jackson.annotation.SensitiveStrategy;
+import io.github.easy4j.jackson.annotation.Sensitive;
+import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 
 import java.io.IOException;
 import java.util.Objects;

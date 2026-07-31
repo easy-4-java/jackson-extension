@@ -1,8 +1,8 @@
-package io.github.hiwepy.jackson.annotation;
+package io.github.easy4j.jackson.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.github.hiwepy.jackson.ser.SensitiveJsonSerializer;
+import io.github.easy4j.jackson.ser.SensitiveJsonSerializer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
