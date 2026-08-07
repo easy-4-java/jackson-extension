@@ -106,7 +106,7 @@ Single-module jar. Package layout under `io.github.easy4j.jackson`:
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>1.0.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
