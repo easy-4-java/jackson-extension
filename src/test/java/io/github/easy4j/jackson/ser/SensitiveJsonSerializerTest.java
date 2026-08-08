@@ -1,6 +1,7 @@
 package io.github.easy4j.jackson.ser;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import io.github.easy4j.jackson.annotation.Sensitive;
 import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SensitiveJsonSerializerTest {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = JsonMapper.builder().build();
 
     @Test
     void shouldMaskDifferentFieldsWithoutChangingSourceObject() throws Exception {
@@ -26,8 +27,8 @@ class SensitiveJsonSerializerTest {
         String json = objectMapper.writeValueAsString(payload);
 
         assertEquals(
-                "{\"name\":\"张**\",\"phone\":\"138****5678\","
-                        + "\"bankCard\":\"6222********7890\",\"email\":\"t*****@example.com\"}",
+                "{\"bankCard\":\"6222********7890\",\"email\":\"t*****@example.com\","
+                        + "\"name\":\"张**\",\"phone\":\"138****5678\"}",
                 json);
         assertEquals("张三丰", payload.name);
         assertEquals("13812345678", payload.phone);
