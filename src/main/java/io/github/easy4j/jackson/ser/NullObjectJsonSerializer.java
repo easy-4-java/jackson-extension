@@ -10,15 +10,53 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 处理实体对象类型的null值
+ * JSON serializer that emits an empty JSON object ({@code {}}) whenever an
+ * object-typed property is {@code null}.
+ *
+ * <p>Installed as the {@code nullSerializer} for bean properties whose
+ * declared type is a {@link Map}, a non-primitive POJO or an enum (see
+ * {@link MyBeanSerializerModifier#isJsonObjectType(Class)}). Producing an
+ * empty object keeps client code that always expects an object literal
+ * simple.</p>
+ *
+ * <p>The unused {@link #EMPTY_MAP} field is retained as a placeholder for
+ * future implementations that may want to inspect the streaming context to
+ * write richer default values.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see ValueSerializer
+ * @see NullArrayJsonSerializer
  */
 public class NullObjectJsonSerializer extends ValueSerializer<Object> {
 
+    /** Reusable singleton instance. */
     public static final NullObjectJsonSerializer INSTANCE = new NullObjectJsonSerializer();
+
+    /**
+     * Placeholder empty map retained for potential future use; never
+     * serialised directly because this class writes an empty JSON object
+     * via the streaming API.
+     */
+    @SuppressWarnings("unused")
     private static final Map<String, Object> EMPTY_MAP = new HashMap<>(1);
 
+    /**
+     * Serialize the supplied value, writing an empty JSON object when the
+     * value is {@code null}.
+     *
+     * <p>Non-null values are intentionally ignored: this serializer is only
+     * ever invoked by Jackson for null property values because it is wired
+     * through {@code BeanPropertyWriter.assignNullSerializer}.</p>
+     *
+     * @param value             the value being serialized; expected to be
+     *                          {@code null} when this serializer is invoked.
+     * @param jsonGenerator     the active JSON generator.
+     * @param serializerProvider contextual access to the surrounding
+     *                          serialization state; not used.
+     * @throws JacksonException propagated from the underlying generator.
+     */
     @Override
     public void serialize(Object value, JsonGenerator jsonGenerator, SerializationContext serializerProvider)
             throws JacksonException {
