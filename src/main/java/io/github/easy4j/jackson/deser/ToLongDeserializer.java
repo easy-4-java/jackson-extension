@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  * {@code 123L}. Use a different deserializer when strict parsing is required.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ValueDeserializer
  * @see BigDecimal

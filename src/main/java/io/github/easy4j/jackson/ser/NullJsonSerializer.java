@@ -17,7 +17,7 @@ import java.util.Objects;
  * toolkit offers a complete, symmetrical set of null serializers.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ValueSerializer
  * @see NullStringJsonSerializer

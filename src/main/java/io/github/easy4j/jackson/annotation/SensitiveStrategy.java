@@ -18,7 +18,7 @@ import java.util.function.Function;
  * the domain part of the address.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Sensitive
  */

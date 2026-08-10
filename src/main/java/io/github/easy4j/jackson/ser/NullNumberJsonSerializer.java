@@ -17,7 +17,7 @@ import java.util.Objects;
  * literal avoids {@link NullPointerException}s in client arithmetic.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ValueSerializer
  * @see NullBooleanJsonSerializer

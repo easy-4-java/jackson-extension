@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
  * to the same canonical representation regardless of the runtime locale.</p>
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see SimpleModule
  * @see LocalDateTimeSerializer
