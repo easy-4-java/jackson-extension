@@ -5,123 +5,83 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.function.Function;
 
 /**
- * Catalogue of built-in data masking strategies used by {@link Sensitive}.
- *
- * <p>Each constant carries a {@link Function} that transforms an input
- * string into its masked representation. The {@link #mask(String)} entry
- * point applies the function while short-circuiting empty inputs.</p>
- *
- * <p>Most strategies are implemented through {@link #maskBetween(String, int, int)}
- * which keeps a fixed number of characters at the prefix and suffix of the
- * value while replacing everything in between with {@code '*'}. The
- * {@link #EMAIL} strategy uses {@link #maskEmail(String)} which preserves
- * the domain part of the address.</p>
+ * 数据脱敏策略。
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
- * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
- * @see Sensitive
+ * @since 11 :25
  */
 public enum SensitiveStrategy {
 
     /**
-     * Sentinel strategy that performs no masking; the input is returned
-     * unchanged. Useful when the default masking logic must be bypassed.
+     * 不进行脱敏，保留原始值。
      */
     NONE(Function.identity()),
-
     /**
-     * Generic masking strategy that keeps the first and last character of the
-     * value visible. Falls back to the original value when the visible
-     * prefix/suffix span the entire input.
+     * 通用脱敏，保留首尾各一个字符。
      */
     DEFAULT(value -> maskBetween(value, 1, 1)),
-
     /**
-     * Username-style masking. Equivalent to {@link #DEFAULT} but semantically
-     * named to make the intent explicit when used on user identifiers.
+     * 用户名脱敏，保留首尾各一个字符。
      */
     USERNAME(value -> maskBetween(value, 1, 1)),
-
     /**
-     * Chinese-name masking: keeps the first character visible (surname) and
-     * masks the remainder. Suitable for two- and three-character Chinese names.
+     * 中文姓名脱敏，仅保留第一个字符。
      */
     CHINESE_NAME(value -> maskBetween(value, 1, 0)),
-
     /**
-     * Mainland China resident identity-card masking: keeps the first three and
-     * last four digits visible, masking the eight-digit birth-date segment.
+     * 身份证号码脱敏，保留前三位和后四位。
      */
     ID_CARD(value -> maskBetween(value, 3, 4)),
-
     /**
-     * Mainland China mobile phone number masking: keeps the first three and
-     * last four digits visible (e.g. {@code 185****1653}).
+     * 手机号码脱敏，保留前三位和后四位，例如：185****1653。
      */
     PHONE(value -> maskBetween(value, 3, 4)),
-
     /**
-     * Landline telephone masking: keeps the area code (two digits) and last
-     * four digits visible.
+     * 固定电话号码脱敏，保留前两位和后四位。
      */
     FIXED_PHONE(value -> maskBetween(value, 2, 4)),
-
     /**
-     * Postal address masking: keeps the first six characters visible and masks
-     * the remainder. Suitable for province/city-level granularity.
+     * 地址脱敏，保留前六个字符。
      */
     ADDRESS(value -> maskBetween(value, 6, 0)),
-
     /**
-     * E-mail address masking. Preserves the first local-part character and the
-     * entire domain part (e.g. {@code r*****@qq.com}).
+     * 电子邮箱脱敏，仅保留邮箱名前缀的首字符及完整域名，例如：r*****@qq.com。
      */
     EMAIL(SensitiveStrategy::maskEmail),
-
     /**
-     * Bank card masking: keeps the first four and last four digits visible.
+     * 银行卡号脱敏，保留前四位和后四位。
      */
     BANK_CARD(value -> maskBetween(value, 4, 4)),
-
     /**
-     * Bank of China CNAPS code masking: keeps the first four characters visible.
+     * 银行联行号脱敏，保留前四位。
      */
     CNAPS_CODE(value -> maskBetween(value, 4, 0)),
-
     /**
-     * Payment signing agreement number masking: keeps the first six and last
-     * six characters visible.
+     * 支付签约协议号脱敏，保留前六位和后六位。
      */
     PAY_SIGN_NO(value -> maskBetween(value, 6, 6)),
 
     ;
 
     /**
-     * Concrete masking function that applies the strategy to a non-empty
-     * value. Stored per-enum-constant and used by {@link #mask(String)}.
+     * 脱敏处理函数
      */
     private final Function<String, String> desensitizer;
 
     /**
-     * Construct a strategy with the supplied masking function.
+     * 构造函数
      *
-     * @param desensitizer the masking function to apply; never {@code null}.
+     * @param desensitizer 脱敏处理函数
      */
     SensitiveStrategy(Function<String, String> desensitizer) {
         this.desensitizer = desensitizer;
     }
 
     /**
-     * Apply this strategy to the supplied value.
+     * 对指定字符串执行当前脱敏策略。
      *
-     * <p>Empty inputs are returned unchanged to preserve the round-trip
-     * contract (a missing value should not be silently turned into
-     * asterisks). Non-empty inputs are forwarded to the underlying
-     * {@link Function}.</p>
-     *
-     * @param value the original string to mask; may be {@code null} or empty.
-     * @return the masked value, or the original {@code value} when empty.
+     * @param value 原始字符串
+     * @return 脱敏后的字符串；原始值为空时直接返回
      */
     public String mask(String value) {
         if (StringUtils.isEmpty(value)) {
@@ -131,12 +91,10 @@ public enum SensitiveStrategy {
     }
 
     /**
-     * Mask an e-mail address while preserving the first local-part character
-     * and the full domain.
+     * 对电子邮箱地址执行脱敏。
      *
-     * @param value a non-null e-mail address.
-     * @return the masked e-mail address, or {@code value} unchanged when the
-     *         local part has fewer than two characters.
+     * @param value 原始电子邮箱地址
+     * @return 脱敏后的电子邮箱地址
      */
     private static String maskEmail(String value) {
         int atIndex = StringUtils.indexOf(value, '@');
@@ -149,15 +107,12 @@ public enum SensitiveStrategy {
     }
 
     /**
-     * Mask the middle portion of a string while keeping a fixed prefix and
-     * suffix visible.
+     * 对字符串中间部分执行脱敏，并保留指定长度的前缀和后缀。
      *
-     * @param value         the original non-null string to mask.
-     * @param visiblePrefix length of the unmasked prefix; must be non-negative.
-     * @param visibleSuffix length of the unmasked suffix; must be non-negative.
-     * @return the masked string, or {@code value} unchanged when the input
-     *         length is shorter than or equal to the visible prefix plus
-     *         visible suffix.
+     * @param value         原始字符串
+     * @param visiblePrefix 保留的前缀长度
+     * @param visibleSuffix 保留的后缀长度
+     * @return 脱敏后的字符串
      */
     private static String maskBetween(String value, int visiblePrefix, int visibleSuffix) {
         int length = StringUtils.length(value);

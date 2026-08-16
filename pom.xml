@@ -61,7 +61,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependency versions -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
-        <jackson.version>2.17.2</jackson.version>
+        <jackson-bom.version>2.18.9</jackson-bom.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
         <junit.version>5.11.4</junit.version>
         <lombok.version>1.18.46</lombok.version>
@@ -92,7 +92,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -119,30 +119,6 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit-jupiter.version}</version>
-            </dependency>
-            <!-- For Jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <!-- For Jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jdk8</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <!-- For Jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <!-- For Jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-parameter-names</artifactId>
-                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
