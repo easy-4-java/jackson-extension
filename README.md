@@ -6,7 +6,7 @@
 
 jackson-extension is a standalone Jackson extension that covers Java time formatting, null-value serialization,
 
-> **Status**: maintained on the `feature/2.0.x` line (JDK 17). Latest Maven Central release: `2.0.x.20260630`.
+> **Status**: maintained on the `feature/2.0.x` line (JDK 17). Latest Maven Central release: `2.0.x.20260730`.
 
 ## Table of Contents
 
@@ -106,17 +106,17 @@ Single-module jar. Package layout under `io.github.easy4j.jackson`:
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>2.0.x.20260630</version>
+    <version>2.0.x.20260730</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'io.github.easy4j:jackson-extension:2.0.x.20260630'
+implementation 'io.github.easy4j:jackson-extension:2.0.x.20260730'
 ```
 
-This release is available from Maven Central. The next development snapshot is `2.0.x.20260730-SNAPSHOT`.
+This release is available from Maven Central. The next development snapshot is `2.0.x.20260831-SNAPSHOT`.
 
 ## 6. Quick Start
 
@@ -214,7 +214,7 @@ Three parallel version lines, each bound to a JDK baseline:
 | `feature/2.0.x` | 17 | `2.0.x.*` | Maintained in parallel |
 | `feature/3.0.x` | 21 | `3.0.x.*` | Maintained in parallel |
 
-Each line is compiled and tested with its own JDK baseline; dependency versions (including Jackson) may differ per line. The latest release is `2.0.x.20260630`; the next development snapshot is `2.0.x.20260730-SNAPSHOT`.
+Each line is compiled and tested with its own JDK baseline; dependency versions (including Jackson) may differ per line. The latest release is `2.0.x.20260730`; the next development snapshot is `2.0.x.20260831-SNAPSHOT`.
 
 ## 11. Contributing & License
 
