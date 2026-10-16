@@ -6,7 +6,7 @@
 
 jackson-extension is a standalone Jackson extension that covers Java time formatting, null-value serialization,
 
-> **Status**: maintained on the `feature/2.0.x` line (JDK 8). Artifacts are not yet published to Maven Central; they are distributed through the project's private repository and GitHub Releases.
+> **Status**: maintained on the `feature/2.0.x` line (JDK 17). Latest Maven Central release: `2.0.x.20260630`.
 
 ## Table of Contents
 
@@ -63,9 +63,9 @@ Typical scenarios:
 | Item | Requirement |
 | :--- | :--- |
 | JDK | 17+ |
-| Maven | 3.0+ (Maven Wrapper `mvnw` included) |
-| Jackson | 2.17.2 (databind, datatype-jdk8, datatype-jsr310, module-parameter-names) |
-| Other deps | commons-lang3 3.20.0, slf4j-api 2.0.18, lombok (provided); JUnit 5.11.4 (test) |
+| Maven | 3.9.16 (Maven Wrapper `mvnw` included) |
+| Jackson | 2.22.3 (managed by Jackson BOM) |
+| Other deps | commons-lang3 3.20.0, slf4j-api 2.0.18, lombok (provided); JUnit 6.1.0 (test) |
 
 Version lines:
 
@@ -88,7 +88,7 @@ Version lines:
      +----------------------------------------------------+
      |
      v
-POJO  -->  Jackson (databind 2.17.x)  -->  JSON
+POJO  -->  Jackson (databind 2.22.3)  -->  JSON
 ```
 
 Single-module jar. Package layout under `io.github.easy4j.jackson`:
@@ -106,17 +106,17 @@ Single-module jar. Package layout under `io.github.easy4j.jackson`:
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>2.0.x.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.20260630</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'io.github.easy4j:jackson-extension:2.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:jackson-extension:2.0.x.20260630'
 ```
 
-The snapshot is served from the project's private repository (see `distributionManagement` in the pom). No Maven Central release is available yet.
+This release is available from Maven Central. The next development snapshot is `2.0.x.20260730-SNAPSHOT`.
 
 ## 6. Quick Start
 
@@ -199,7 +199,7 @@ public class Order {
 
 The build is configured with:
 
-- JUnit 5 (`junit-jupiter` 5.11.4) and Maven Surefire;
+- JUnit 5 (`junit-jupiter` 6.1.0) and Maven Surefire;
 - JaCoCo coverage reporting plus a line-coverage check rule with a 90% minimum target (`haltOnFailure=false`);
 - Source and Javadoc jars attached at package time;
 - a `release` profile (GPG signing + Central publishing) reserved for official releases.
@@ -214,7 +214,7 @@ Three parallel version lines, each bound to a JDK baseline:
 | `feature/2.0.x` | 17 | `2.0.x.*` | Maintained in parallel |
 | `feature/3.0.x` | 21 | `3.0.x.*` | Maintained in parallel |
 
-Each line is compiled and tested with its own JDK baseline; dependency versions (including Jackson) may differ per line. Snapshots on this branch are versioned `2.0.x.x.20260630-SNAPSHOT`.
+Each line is compiled and tested with its own JDK baseline; dependency versions (including Jackson) may differ per line. The latest release is `2.0.x.20260630`; the next development snapshot is `2.0.x.20260730-SNAPSHOT`.
 
 ## 11. Contributing & License
 
