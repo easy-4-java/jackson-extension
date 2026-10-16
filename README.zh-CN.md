@@ -6,7 +6,7 @@
 
 jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型格式化、空值序列化、数据脱敏与标量类型转换能力。
 
-> **项目状态**：`feature/1.0.x` 版本线维护中（JDK 8）。Maven Central 最新正式版为 `1.0.x.20260630`。
+> **项目状态**：`feature/1.0.x` 版本线维护中（JDK 8）。Maven Central 最新正式版为 `1.0.x.20260730`。
 
 ## 目录
 
@@ -106,17 +106,17 @@ POJO  -->  Jackson (databind 2.18.11)  -->  JSON
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>1.0.x.20260630</version>
+    <version>1.0.x.20260730</version>
 </dependency>
 ```
 
 Gradle：
 
 ```groovy
-implementation 'io.github.easy4j:jackson-extension:1.0.x.20260630'
+implementation 'io.github.easy4j:jackson-extension:1.0.x.20260730'
 ```
 
-该正式版可从 Maven Central 获取；下一开发快照版本为 `1.0.x.20260730-SNAPSHOT`。
+该正式版可从 Maven Central 获取；下一开发快照版本为 `1.0.x.20260831-SNAPSHOT`。
 
 ## 6. 快速开始
 
@@ -214,7 +214,7 @@ public class Order {
 | `feature/2.0.x` | 17 | `2.0.x.*` | 并行维护 |
 | `feature/3.0.x` | 21 | `3.0.x.*` | 并行维护 |
 
-各版本线使用对应 JDK 编译与测试，依赖版本（含 Jackson）随版本线可能不同。最新正式版为 `1.0.x.20260630`，下一开发快照为 `1.0.x.20260730-SNAPSHOT`。
+各版本线使用对应 JDK 编译与测试，依赖版本（含 Jackson）随版本线可能不同。最新正式版为 `1.0.x.20260730`，下一开发快照为 `1.0.x.20260831-SNAPSHOT`。
 
 ## 11. 贡献与许可
 

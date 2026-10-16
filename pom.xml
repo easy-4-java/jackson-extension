@@ -5,7 +5,7 @@
     <artifactId>jackson-extension</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
-    <version>1.0.x.20260730</version>
+    <version>1.0.x.20260831-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Jackson extensions for Java time, null handling, data masking and scalar conversion</description>
 
