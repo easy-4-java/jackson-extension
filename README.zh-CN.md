@@ -6,7 +6,7 @@
 
 jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型格式化、空值序列化、数据脱敏与标量类型转换能力。
 
-> **项目状态**：`feature/3.0.x` 版本线维护中（JDK 8）。制品尚未发布到 Maven Central，通过项目私服与 GitHub Releases 分发。
+> **项目状态**：`feature/3.0.x` 版本线维护中（JDK 21）。Maven Central 最新正式版为 `3.0.x.20260630`。
 
 ## 目录
 
@@ -63,9 +63,9 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
 | 项目 | 要求 |
 | :--- | :--- |
 | JDK | 21+ |
-| Maven | 3.0+（内置 Maven Wrapper `mvnw`） |
-| Jackson | 2.17.2（databind、datatype-jdk8、datatype-jsr310、module-parameter-names） |
-| 其他依赖 | commons-lang3 3.20.0、slf4j-api 2.0.18、lombok（provided）；JUnit 5.11.4（测试） |
+| Maven | 4.0.0-rc-5（内置 Maven Wrapper `mvnw`） |
+| Jackson | 3.2.3（由 Jackson BOM 管理） |
+| 其他依赖 | commons-lang3 3.20.0、slf4j-api 2.0.18、lombok（provided）；JUnit 6.1.0（测试） |
 
 版本线：
 
@@ -88,7 +88,7 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
      +----------------------------------------------------+
      |
      v
-POJO  -->  Jackson (databind 2.17.x)  -->  JSON
+POJO  -->  Jackson (databind 3.2.3)  -->  JSON
 ```
 
 单模块 jar。`io.github.easy4j.jackson` 下的包结构：
@@ -106,17 +106,17 @@ POJO  -->  Jackson (databind 2.17.x)  -->  JSON
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>jackson-extension</artifactId>
-    <version>3.0.x.x.20260630-SNAPSHOT</version>
+    <version>3.0.x.20260630</version>
 </dependency>
 ```
 
 Gradle：
 
 ```groovy
-implementation 'io.github.easy4j:jackson-extension:3.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:jackson-extension:3.0.x.20260630'
 ```
 
-快照版本由项目私服提供（见 pom 中 `distributionManagement`）。尚未发布 Maven Central 正式版。
+该正式版可从 Maven Central 获取；下一开发快照版本为 `3.0.x.20260730-SNAPSHOT`。
 
 ## 6. 快速开始
 
@@ -214,7 +214,7 @@ public class Order {
 | `feature/2.0.x` | 17 | `2.0.x.*` | 并行维护 |
 | `feature/3.0.x` | 21 | `3.0.x.*` | 并行维护 |
 
-各版本线使用对应 JDK 编译与测试，依赖版本（含 Jackson）随版本线可能不同。本分支快照版本为 `3.0.x.x.20260630-SNAPSHOT`。
+各版本线使用对应 JDK 编译与测试，依赖版本（含 Jackson）随版本线可能不同。最新正式版为 `3.0.x.20260630`，下一开发快照为 `3.0.x.20260730-SNAPSHOT`。
 
 ## 11. 贡献与许可
 
