@@ -200,7 +200,7 @@ public class Order {
 构建配置：
 
 - JUnit 5（`junit-jupiter` 5.11.4）+ Maven Surefire；
-- JaCoCo 覆盖率报告 + 行覆盖率检查规则，最低目标 90%（`haltOnFailure=false`）；
+- JaCoCo 覆盖率报告 + 行覆盖率检查规则，最低目标 90%（`haltOnFailure=true`）；
 - package 阶段附加源码包与 Javadoc 包；
 - 提供 `release` profile（GPG 签名 + Central 发布插件），仅用于正式发布。
 

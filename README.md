@@ -200,7 +200,7 @@ public class Order {
 The build is configured with:
 
 - JUnit 5 (`junit-jupiter` 6.1.0) and Maven Surefire;
-- JaCoCo coverage reporting plus a line-coverage check rule with a 90% minimum target (`haltOnFailure=false`);
+- JaCoCo coverage reporting plus a line-coverage check rule with a 90% minimum target (`haltOnFailure=true`);
 - Source and Javadoc jars attached at package time;
 - a `release` profile (GPG signing + Central publishing) reserved for official releases.
 
