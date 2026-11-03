@@ -64,7 +64,7 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
 | :--- | :--- |
 | JDK | 8+ |
 | Maven | 3.9.16（内置 Maven Wrapper `mvnw`） |
-| Jackson | 2.18.11（由 Jackson BOM 管理） |
+| Jackson | 2.18.12（由 Jackson BOM 管理） |
 | 其他依赖 | commons-lang3 3.20.0、slf4j-api 2.0.18、lombok（provided）；JUnit 5.11.4（测试） |
 
 版本线：
@@ -88,7 +88,7 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
      +----------------------------------------------------+
      |
      v
-POJO  -->  Jackson (databind 2.18.11)  -->  JSON
+POJO  -->  Jackson (databind 2.18.12)  -->  JSON
 ```
 
 单模块 jar。`io.github.easy4j.jackson` 下的包结构：
@@ -200,7 +200,7 @@ public class Order {
 构建配置：
 
 - JUnit 5（`junit-jupiter` 5.11.4）+ Maven Surefire；
-- JaCoCo 覆盖率报告 + 行覆盖率检查规则，最低目标 90%（`haltOnFailure=false`）；
+- JaCoCo 覆盖率报告 + 行覆盖率检查规则，最低目标 90%（`haltOnFailure=true`）；
 - package 阶段附加源码包与 Javadoc 包；
 - 提供 `release` profile（GPG 签名 + Central 发布插件），仅用于正式发布。
 
