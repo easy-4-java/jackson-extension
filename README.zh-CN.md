@@ -56,7 +56,7 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
 | null 数值/布尔/日期/对象处理 | 已实现 | `NullNumberJsonSerializer`、`NullBooleanJsonSerializer`、`NullDateJsonSerializer`、`NullObjectJsonSerializer`（可通过 `MyBeanSerializerModifier` 构造参数开关） |
 | 敏感数据脱敏 | 已实现 | `@Sensitive` + `SensitiveJsonSerializer` + `SensitiveStrategy` 12 种策略 |
 | 标量转换 | 已实现 | `ToLongDeserializer`（字符串 → `Long`） |
-| 测试 | 已有 | JUnit 5 套件，覆盖脱敏策略、输出格式与并发隔离 |
+| 测试 | 已有 | JUnit Jupiter 套件，覆盖脱敏策略、输出格式与并发隔离 |
 
 ## 3. 环境要求与兼容性
 
@@ -65,7 +65,7 @@ jackson-extension 是独立的 Jackson 扩展组件，提供 Java 时间类型�
 | JDK | 21+ |
 | Maven | 4.0.0-rc-5（内置 Maven Wrapper `mvnw`） |
 | Jackson | 3.2.4（由 Jackson BOM 管理） |
-| 其他依赖 | commons-lang3 3.20.0、slf4j-api 2.0.18、lombok（provided）；JUnit 6.1.0（测试） |
+| 其他依赖 | commons-lang3 3.20.0、slf4j-api 2.0.18、lombok（provided）；JUnit Jupiter 6.1.0（测试） |
 
 版本线：
 
@@ -199,7 +199,7 @@ public class Order {
 
 构建配置：
 
-- JUnit 5（`junit-jupiter` 5.11.4）+ Maven Surefire；
+- JUnit Jupiter 6.1.0（`junit-jupiter`）+ Maven Surefire；
 - JaCoCo 覆盖率报告 + 行覆盖率检查规则，最低目标 90%（`haltOnFailure=true`）；
 - package 阶段附加源码包与 Javadoc 包；
 - 提供 `release` profile（GPG 签名 + Central 发布插件），仅用于正式发布。
