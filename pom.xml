@@ -60,7 +60,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependency versions -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
-        <jackson-bom.version>2.22.3</jackson-bom.version>
+        <jackson-bom.version>2.22.4</jackson-bom.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <junit.version>5.11.4</junit.version>
         <lombok.version>1.18.46</lombok.version>
@@ -360,7 +360,7 @@
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <useModulePath>false</useModulePath>
-                        <argLine>-Xmx1024m -Dfile.encoding=UTF-8</argLine>
+                        <argLine>@{argLine} -Xmx1024m -Dfile.encoding=UTF-8</argLine>
                     </configuration>
                 </plugin>
 
@@ -408,7 +408,7 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <haltOnFailure>false</haltOnFailure>
+                            <haltOnFailure>true</haltOnFailure>
                             <rules>
                                 <rule>
                                     <element>BUNDLE</element>
