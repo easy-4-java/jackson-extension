@@ -1,7 +1,7 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.databind.module.SimpleModule;
-import tools.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * both with the default flags and with every individual flag toggled on
  * or off.</p>
  *
- * @since 3.0.0
  */
 class MyBeanSerializerModifierTest {
 

@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * with both the canonical sample inputs and edge cases (null, empty,
  * short strings that fall under the visible-prefix/suffix threshold).</p>
  *
- * @since 3.0.0
  */
 class SensitiveStrategyTest {
 
