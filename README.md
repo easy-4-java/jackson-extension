@@ -56,7 +56,7 @@ Typical scenarios:
 | Null number / boolean / date / object handling | Implemented | `NullNumberJsonSerializer`, `NullBooleanJsonSerializer`, `NullDateJsonSerializer`, `NullObjectJsonSerializer` (toggleable via `MyBeanSerializerModifier` constructor flags) |
 | Sensitive data masking | Implemented | `@Sensitive` + `SensitiveJsonSerializer` + 12 strategies in `SensitiveStrategy` |
 | Scalar conversion | Implemented | `ToLongDeserializer` (string → `Long`) |
-| Tests | Present | JUnit 5 suite covering masking strategies, output format and concurrency isolation |
+| Tests | Present | JUnit Jupiter suite covering masking strategies, output format and concurrency isolation |
 
 ## 3. Requirements & Compatibility
 
@@ -64,8 +64,8 @@ Typical scenarios:
 | :--- | :--- |
 | JDK | 21+ |
 | Maven | 4.0.0-rc-5 (Maven Wrapper `mvnw` included) |
-| Jackson | 3.2.3 (managed by Jackson BOM) |
-| Other deps | commons-lang3 3.20.0, slf4j-api 2.0.18, lombok (provided); JUnit 6.1.0 (test) |
+| Jackson | 3.2.4 (managed by Jackson BOM) |
+| Other deps | commons-lang3 3.20.0, slf4j-api 2.0.18, lombok (provided); JUnit Jupiter 6.1.0 (test) |
 
 Version lines:
 
@@ -88,7 +88,7 @@ Version lines:
      +----------------------------------------------------+
      |
      v
-POJO  -->  Jackson (databind 3.2.3)  -->  JSON
+POJO  -->  Jackson (databind 3.2.4)  -->  JSON
 ```
 
 Single-module jar. Package layout under `io.github.easy4j.jackson`:
@@ -199,8 +199,8 @@ public class Order {
 
 The build is configured with:
 
-- JUnit 5 (`junit-jupiter` 6.1.0) and Maven Surefire;
-- JaCoCo coverage reporting plus a line-coverage check rule with a 90% minimum target (`haltOnFailure=false`);
+- JUnit Jupiter 6.1.0 (`junit-jupiter`) and Maven Surefire;
+- JaCoCo coverage reporting plus a line-coverage check rule with a 90% minimum target (`haltOnFailure=true`);
 - Source and Javadoc jars attached at package time;
 - a `release` profile (GPG signing + Central publishing) reserved for official releases.
 
