@@ -64,7 +64,7 @@ Typical scenarios:
 | :--- | :--- |
 | JDK | 21+ |
 | Maven | 4.0.0-rc-5 (Maven Wrapper `mvnw` included) |
-| Jackson | 3.2.3 (managed by Jackson BOM) |
+| Jackson | 3.2.4 (managed by Jackson BOM) |
 | Other deps | commons-lang3 3.20.0, slf4j-api 2.0.18, lombok (provided); JUnit 6.1.0 (test) |
 
 Version lines:
@@ -88,7 +88,7 @@ Version lines:
      +----------------------------------------------------+
      |
      v
-POJO  -->  Jackson (databind 3.2.3)  -->  JSON
+POJO  -->  Jackson (databind 3.2.4)  -->  JSON
 ```
 
 Single-module jar. Package layout under `io.github.easy4j.jackson`:
