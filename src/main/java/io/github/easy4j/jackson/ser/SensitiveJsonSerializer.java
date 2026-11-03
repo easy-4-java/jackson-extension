@@ -1,10 +1,12 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.core.JacksonException;
-import tools.jackson.core.JsonGenerator;
-import tools.jackson.databind.BeanProperty;
-import tools.jackson.databind.SerializationContext;
-import tools.jackson.databind.ValueSerializer;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import io.github.easy4j.jackson.annotation.Sensitive;
 import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 
@@ -18,7 +20,7 @@ import java.util.Objects;
  * {@link Sensitive} annotation through Jackson's
  * {@code @JsonSerialize(using = ...)} machinery. At runtime the actual
  * strategy is resolved lazily by
- * {@link #createContextual(SerializationContext, BeanProperty)} so that
+ * {@link #createContextual(SerializerProvider, BeanProperty)} so that
  * serializers can be shared across annotations without leaking per-property
  * state.</p>
  *
@@ -36,11 +38,10 @@ import java.util.Objects;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
  * @see Sensitive
  * @see SensitiveStrategy
  */
-public class SensitiveJsonSerializer extends ValueSerializer<String> {
+public class SensitiveJsonSerializer extends JsonSerializer<String> implements ContextualSerializer {
     /**
      * Strategy resolved from the {@link Sensitive} annotation. May be
      * {@code null} when this serializer is used outside an annotated
@@ -52,7 +53,7 @@ public class SensitiveJsonSerializer extends ValueSerializer<String> {
      * Default constructor used by Jackson's reflection-based serializer
      * instantiation. The resulting serializer has no strategy; the actual
      * strategy is bound later by
-     * {@link #createContextual(SerializationContext, BeanProperty)}.
+     * {@link #createContextual(SerializerProvider, BeanProperty)}.
      */
     public SensitiveJsonSerializer() {
         this(null);
@@ -60,7 +61,7 @@ public class SensitiveJsonSerializer extends ValueSerializer<String> {
 
     /**
      * Private strategy-binding constructor used by
-     * {@link #createContextual(SerializationContext, BeanProperty)} to
+     * {@link #createContextual(SerializerProvider, BeanProperty)} to
      * produce a per-property serializer carrying the resolved strategy.
      *
      * @param strategy the masking strategy bound to the current property.
@@ -77,10 +78,10 @@ public class SensitiveJsonSerializer extends ValueSerializer<String> {
      * @param gen         the active JSON generator.
      * @param serializers contextual information from Jackson; not used
      *                    directly.
-     * @throws JacksonException propagated from the underlying generator.
+     * @throws IOException propagated from the underlying generator.
      */
     @Override
-    public void serialize(String value, JsonGenerator gen, SerializationContext serializers) throws JacksonException {
+    public void serialize(String value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         if (Objects.isNull(strategy)) {
             gen.writeString(value);
             return;
@@ -107,7 +108,7 @@ public class SensitiveJsonSerializer extends ValueSerializer<String> {
      *         a non-string property.
      */
     @Override
-    public ValueSerializer<?> createContextual(SerializationContext prov, BeanProperty property) {
+    public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty property) throws JsonMappingException {
 
         if (Objects.isNull(property)) {
             return this;

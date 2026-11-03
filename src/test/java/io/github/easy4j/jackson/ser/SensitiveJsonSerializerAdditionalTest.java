@@ -1,8 +1,8 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.core.JsonGenerator;
-import tools.jackson.databind.ValueSerializer;
-import tools.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.github.easy4j.jackson.annotation.Sensitive;
 import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * the annotation is applied to non-string properties or is absent
  * entirely.</p>
  *
- * @since 3.0.0
  */
 class SensitiveJsonSerializerAdditionalTest {
 
@@ -32,7 +31,7 @@ class SensitiveJsonSerializerAdditionalTest {
         SensitiveJsonSerializer serializer = new SensitiveJsonSerializer();
 
         StringWriter writer = new StringWriter();
-        JsonGenerator generator = mapper.createGenerator(writer);
+        JsonGenerator generator = mapper.getFactory().createGenerator(writer);
 
         serializer.serialize("plain-text", generator, null);
         generator.flush();
@@ -45,7 +44,7 @@ class SensitiveJsonSerializerAdditionalTest {
         SensitiveJsonSerializer serializer = new SensitiveJsonSerializer();
 
         StringWriter writer = new StringWriter();
-        JsonGenerator generator = mapper.createGenerator(writer);
+        JsonGenerator generator = mapper.getFactory().createGenerator(writer);
 
         serializer.serialize(null, generator, null);
         generator.flush();
@@ -54,10 +53,10 @@ class SensitiveJsonSerializerAdditionalTest {
     }
 
     @Test
-    void shouldReturnSameInstanceWhenCreateContextualReceivesNullProperty() {
+    void shouldReturnSameInstanceWhenCreateContextualReceivesNullProperty() throws Exception {
         SensitiveJsonSerializer serializer = new SensitiveJsonSerializer();
 
-        ValueSerializer<?> resolved = serializer.createContextual(null, null);
+        JsonSerializer<?> resolved = serializer.createContextual(null, null);
 
         assertSame(serializer, resolved);
     }

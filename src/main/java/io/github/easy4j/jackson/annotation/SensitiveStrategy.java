@@ -19,7 +19,6 @@ import java.util.function.Function;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
  * @see Sensitive
  */
 public enum SensitiveStrategy {

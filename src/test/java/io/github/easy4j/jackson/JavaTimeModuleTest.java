@@ -1,6 +1,6 @@
 package io.github.easy4j.jackson;
 
-import tools.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * resulting mapper is exercised through serialisation and deserialisation
  * round-trips for the three supported Java time types.</p>
  *
- * @since 3.0.0
  */
 class JavaTimeModuleTest {
 

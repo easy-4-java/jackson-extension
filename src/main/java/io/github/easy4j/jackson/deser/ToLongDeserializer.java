@@ -1,16 +1,16 @@
 package io.github.easy4j.jackson.deser;
 
-import tools.jackson.core.JacksonException;
-import tools.jackson.core.JsonParser;
-import tools.jackson.databind.DeserializationContext;
-import tools.jackson.databind.ValueDeserializer;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 
 /**
- * Lenient {@link ValueDeserializer} that converts string-encoded numeric tokens
+ * Lenient {@link JsonDeserializer} that converts string-encoded numeric tokens
  * into {@link Long} values.
  *
  * <p>The deserializer is intentionally tolerant: blank or whitespace-only
@@ -27,12 +27,11 @@ import java.math.BigDecimal;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
- * @see ValueDeserializer
+ * @see JsonDeserializer
  * @see BigDecimal
  */
 @Slf4j
-public class ToLongDeserializer extends ValueDeserializer<Long> {
+public class ToLongDeserializer extends JsonDeserializer<Long> {
 
     /**
      * Deserialize a JSON token into a {@link Long}.
@@ -46,12 +45,12 @@ public class ToLongDeserializer extends ValueDeserializer<Long> {
      *                               not used by this implementation.
      * @return the parsed {@link Long} value, or {@code null} when the token is
      *         blank or unparsable.
-     * @throws JacksonException propagated from the underlying parser when an
+     * @throws IOException propagated from the underlying parser when an
      *                          unrecoverable streaming error occurs.
      */
     @Override
     public Long deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-            throws JacksonException {
+            throws IOException {
         String value = jsonParser.getText();
         try {
             return StringUtils.isNotBlank(value) ? new BigDecimal(value).longValue() : null;

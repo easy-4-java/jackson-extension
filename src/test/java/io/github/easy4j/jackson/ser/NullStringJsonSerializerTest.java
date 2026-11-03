@@ -1,8 +1,8 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.core.JacksonException;
-import tools.jackson.core.JsonGenerator;
-import tools.jackson.databind.json.JsonMapper;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringWriter;
@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * contract, the type hierarchy and that wrapping a {@link JsonGenerator}
  * does not throw for null input.</p>
  *
- * @since 3.0.0
  */
 class NullStringJsonSerializerTest {
 
@@ -28,15 +27,15 @@ class NullStringJsonSerializerTest {
     }
 
     @Test
-    void shouldExtendValueSerializer() {
+    void shouldExtendJsonSerializer() {
         NullStringJsonSerializer.INSTANCE.getClass().asSubclass(
-                tools.jackson.databind.ValueSerializer.class);
+                com.fasterxml.jackson.databind.JsonSerializer.class);
     }
 
     @Test
-    void shouldEmitEmptyStringForNullInput() throws JacksonException {
+    void shouldEmitEmptyStringForNullInput() throws IOException {
         StringWriter writer = new StringWriter();
-        JsonGenerator generator = JsonMapper.builder().build().createGenerator(writer);
+        JsonGenerator generator = JsonMapper.builder().build().getFactory().createGenerator(writer);
 
         NullStringJsonSerializer.INSTANCE.serialize(null, generator, null);
 

@@ -1,9 +1,9 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.core.JacksonException;
-import tools.jackson.core.JsonGenerator;
-import tools.jackson.databind.ValueSerializer;
-import tools.jackson.databind.SerializationContext;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
@@ -21,11 +21,10 @@ import java.util.Objects;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
- * @see ValueSerializer
+ * @see JsonSerializer
  * @see NullStringJsonSerializer
  */
-public class NullDateJsonSerializer extends ValueSerializer<Object> {
+public class NullDateJsonSerializer extends JsonSerializer<Object> {
 
     /** Reusable singleton instance. */
     public static final NullDateJsonSerializer INSTANCE = new NullDateJsonSerializer();
@@ -43,11 +42,11 @@ public class NullDateJsonSerializer extends ValueSerializer<Object> {
      * @param jsonGenerator     the active JSON generator.
      * @param serializerProvider contextual access to the surrounding
      *                          serialization state; not used.
-     * @throws JacksonException propagated from the underlying generator.
+     * @throws IOException propagated from the underlying generator.
      */
     @Override
-    public void serialize(Object value, JsonGenerator jsonGenerator, SerializationContext serializerProvider)
-            throws JacksonException {
+    public void serialize(Object value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            throws IOException {
         if (Objects.isNull(value)) {
             jsonGenerator.writeString(StringUtils.EMPTY);
         }

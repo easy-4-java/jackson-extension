@@ -1,9 +1,9 @@
 package io.github.easy4j.jackson.deser;
 
-import tools.jackson.core.JsonParser;
-import tools.jackson.databind.DeserializationContext;
-import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * lower-level {@link JsonParser} API so that the lenient blank-token
  * and number-format-exception branches are covered.</p>
  *
- * @since 3.0.0
  */
 class ToLongDeserializerTest {
 
@@ -77,7 +76,7 @@ class ToLongDeserializerTest {
     void shouldReturnNullForWhitespaceOnlyInput() throws Exception {
         ToLongDeserializer deserializer = new ToLongDeserializer();
 
-        JsonParser parser = mapper.createParser(" \" \" ");
+        JsonParser parser = mapper.getFactory().createParser(" \" \" ");
         parser.nextToken();
 
         Long result = deserializer.deserialize(parser, null);
@@ -88,7 +87,7 @@ class ToLongDeserializerTest {
     void shouldReturnNullForMalformedToken() throws Exception {
         ToLongDeserializer deserializer = new ToLongDeserializer();
 
-        JsonParser parser = mapper.createParser("\"abc\"");
+        JsonParser parser = mapper.getFactory().createParser("\"abc\"");
         parser.nextToken();
 
         Long result = deserializer.deserialize(parser, null);

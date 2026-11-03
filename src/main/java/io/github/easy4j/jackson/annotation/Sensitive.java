@@ -1,7 +1,7 @@
 package io.github.easy4j.jackson.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import tools.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.easy4j.jackson.ser.SensitiveJsonSerializer;
 
 import java.lang.annotation.ElementType;
@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
  * @see SensitiveStrategy
  * @see SensitiveJsonSerializer
  */

@@ -1,7 +1,7 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.github.easy4j.jackson.annotation.Sensitive;
 import io.github.easy4j.jackson.annotation.SensitiveStrategy;
 import org.junit.jupiter.api.Test;
@@ -26,10 +26,10 @@ class SensitiveJsonSerializerTest {
 
         String json = objectMapper.writeValueAsString(payload);
 
-        assertEquals(
+        assertEquals(objectMapper.readTree(
                 "{\"bankCard\":\"6222********7890\",\"email\":\"t*****@example.com\","
-                        + "\"name\":\"张**\",\"phone\":\"138****5678\"}",
-                json);
+                        + "\"name\":\"张**\",\"phone\":\"138****5678\"}"),
+                objectMapper.readTree(json));
         assertEquals("张三丰", payload.name);
         assertEquals("13812345678", payload.phone);
         assertEquals("6222021234567890", payload.bankCard);

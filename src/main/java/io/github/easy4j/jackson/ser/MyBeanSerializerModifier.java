@@ -1,9 +1,9 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.databind.BeanDescription;
-import tools.jackson.databind.SerializationConfig;
-import tools.jackson.databind.ser.BeanPropertyWriter;
-import tools.jackson.databind.ser.ValueSerializerModifier;
+import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@link ValueSerializerModifier} that installs the project's family of
+ * {@link BeanSerializerModifier} that installs the project's family of
  * null serializers on a per-property basis.
  *
  * <p>The modifier is the configuration hub that wires the following
@@ -43,8 +43,7 @@ import java.util.Map;
  *
  * @author <a href="https://github.com/partme-ai">PartMe.AI</a>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @since 3.0.0
- * @see ValueSerializerModifier
+ * @see BeanSerializerModifier
  * @see NullArrayJsonSerializer
  * @see NullStringJsonSerializer
  * @see NullNumberJsonSerializer
@@ -52,7 +51,7 @@ import java.util.Map;
  * @see NullDateJsonSerializer
  * @see NullObjectJsonSerializer
  */
-public class MyBeanSerializerModifier extends ValueSerializerModifier {
+public class MyBeanSerializerModifier extends BeanSerializerModifier {
 
     /** Whether arrays and {@link Collection} subtypes are rewritten as {@code []}. */
     private final boolean defaultNullArraySerializer;
@@ -110,7 +109,7 @@ public class MyBeanSerializerModifier extends ValueSerializerModifier {
      * every serialised bean.
      *
      * <p>The supplied {@code beanProperties} list is mutated in place and
-     * also returned to satisfy the {@link ValueSerializerModifier} contract.
+     * also returned to satisfy the {@link BeanSerializerModifier} contract.
      * Properties whose declared Java type does not match any enabled rule
      * are left untouched.</p>
      *
@@ -124,7 +123,7 @@ public class MyBeanSerializerModifier extends ValueSerializerModifier {
      */
     @Override
     public List<BeanPropertyWriter> changeProperties(SerializationConfig config,
-                                                     BeanDescription.Supplier beanDesc,
+                                                     BeanDescription beanDesc,
                                                      List<BeanPropertyWriter> beanProperties) {
         // 1、循环所有的beanPropertyWriter
         for (BeanPropertyWriter writer : beanProperties) {

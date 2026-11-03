@@ -1,8 +1,8 @@
 package io.github.easy4j.jackson.ser;
 
-import tools.jackson.core.JacksonException;
-import tools.jackson.core.JsonGenerator;
-import tools.jackson.databind.json.JsonMapper;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringWriter;
@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * <p>The serializer must emit a JSON {@code null} literal for null inputs
  * and remain a singleton. The tests verify both contracts.</p>
  *
- * @since 3.0.0
  */
 class NullJsonSerializerTest {
 
@@ -26,15 +25,15 @@ class NullJsonSerializerTest {
     }
 
     @Test
-    void shouldExtendValueSerializer() {
+    void shouldExtendJsonSerializer() {
         NullJsonSerializer.INSTANCE.getClass().asSubclass(
-                tools.jackson.databind.ValueSerializer.class);
+                com.fasterxml.jackson.databind.JsonSerializer.class);
     }
 
     @Test
-    void shouldEmitJsonNullForNullInput() throws JacksonException {
+    void shouldEmitJsonNullForNullInput() throws IOException {
         StringWriter writer = new StringWriter();
-        JsonGenerator generator = JsonMapper.builder().build().createGenerator(writer);
+        JsonGenerator generator = JsonMapper.builder().build().getFactory().createGenerator(writer);
 
         NullJsonSerializer.INSTANCE.serialize(null, generator, null);
 

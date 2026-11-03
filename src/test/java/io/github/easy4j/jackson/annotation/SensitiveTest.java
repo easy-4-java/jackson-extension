@@ -1,7 +1,7 @@
 package io.github.easy4j.jackson.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import tools.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.easy4j.jackson.ser.SensitiveJsonSerializer;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * runtime and target meta-annotations, as well as the strategy accessor,
  * behave as documented.</p>
  *
- * @since 3.0.0
  */
 class SensitiveTest {
 
